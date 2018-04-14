@@ -26,27 +26,27 @@
             'already_requested' => 'The airdrop for this address has already been requested or collected.',
             'airdrop_request_success' => 'Thank you! Your airdrop request has been successfully recorded. Please note it may take several days before your tokens are batched and sent to you.'
             ),
-        'en2' => array(
-            'language' => 'English2',
-            'page_title' => 'eosDAC Airdrop Tool2',
-            'welcome_message' => 'Thank you for participating in the eosDAC airdrop!2',
-            'tool_explanation' => 'This simple form can be used to request a manual airdrop to your Ethereum address or review the status the airdrop for your Ethereum address2',
-            'eth_address' => 'ETH Address2',
-            'eos_amount' => 'EOS Amount2',
-            'status' => 'Status2',
-            'transaction_hash' => 'Transaction Hash2',
-            'view_on_etherscan' => 'View transaction on etherscan2',
-            'missing_eth_address' => 'Please enter your Ethereum address which held EOS on April 15th at 01:00 UTC.2',
-            'eth_address_not_found' => 'We were unable to find the Ethereum address you supplied in the snapshot data.2',
-            //'terms' => 'I agree to the eosDAC <a href="https://eosdac.io/terms/">terms of service</a>2',
-            'submit' => 'Submit2',
-            //'error_terms' => 'You must agree to the terms of service.2',
-            'start_over' => 'Start over2',
-            'request_type_airdrop' => 'Request Airdrop for this Address2',
-            'request_type_status' => 'Review Status of this Address2',
-            'already_requested' => 'The airdrop for this address has already been requested or collected.2',
-            'airdrop_request_success' => 'Thank you! Your airdrop request has been successfully recorded. Please note it may take several days before your tokens are batched and sent to you.2'
-            )
+        'kor' => array(
+            'language' => '한글',
+            'page_title' => 'eosDAC 에어드랍 툴',
+            'welcome_message' => 'eosDAC 에어드랍에 참여해 주셔서 감사합니다!',
+            'tool_explanation' => '기입란을 작성하셔서 이더리움 주소로 에어드랍을 신청하거나 에어드랍이 확정된 이더리움 주소 스냅샷 상태를 확인할 수 있습니다.',
+            'eth_address' => '이더리움 주소',
+            'eos_amount' => 'EOS 토큰 양',
+            'status' => '상태',
+            'transaction_hash' => '거래 해시 내역',
+            'view_on_etherscan' => '이더스캔으로 거래 내역 보기',
+            'missing_eth_address' => '4월 15일 01:00 UTC 시각에 EOS를 보유한 이더리움 주소를 기입하여 주십시오.',
+            'eth_address_not_found' => '기입하신 이더리움 주소에 해당하는 스냅샷 정보를 찾지 못했습니다.',
+            //'terms' => 'eosDAC <a href="https://eosdac.io/terms/">이용 약관</a>에 동의합니다.',
+            'submit' => '제출',
+            //'error_terms' => '이용 약관에 대한 동의가 필요합니다.',
+            'start_over' => '다시 시도',
+            'request_type_airdrop' => '에어드랍을 신청할 이더리움 주소',
+            'request_type_status' => '상태를 확인할 이더리움 주소',
+            'already_requested' => '이 이더리움 주소의 에어드랍은 이미 신청되었거나 전송이 완료되었습니다.',
+            'airdrop_request_success' => '에어드랍 신청이 성공적으로 접수되었습니다. 신청하신 이더리움 주소로 eosDAC 토큰이 전송되기까지 며칠 정도 소요될 수 있습니다. 감사합니다.'
+            ),
         );
 
     $lang = 'en';
