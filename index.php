@@ -11,6 +11,7 @@
             'welcome_message' => 'Thank you for participating in the eosDAC airdrop!',
             'tool_explanation' => 'This simple form can be used to request a manual airdrop to your Ethereum address or review the status the airdrop for your Ethereum address',
             'eth_address' => 'ETH Address',
+            'eth_address_placeholder' => ' 0x... (this should be your public ETH address)',
             'no_private_key'=> 'Warning: please do not enter your private key!',
             'eos_amount' => 'EOS Amount',
             'status' => 'Status',
@@ -28,11 +29,12 @@
             'airdrop_request_success' => 'Thank you! Your airdrop request has been successfully recorded. Please note it may take several days before your tokens are batched and sent to you.'
             ),
         'kor' => array(
-            'language' => '한글',
+            'language' => '한국어',
             'page_title' => 'eosDAC 에어드랍 툴',
             'welcome_message' => 'eosDAC 에어드랍에 참여해 주셔서 감사합니다!',
-            'tool_explanation' => '기입란을 작성하셔서 이더리움 주소로 에어드랍을 신청하거나 에어드랍이 확정된 이더리움 주소 스냅샷 상태를 확인할 수 있습니다.',
+            'tool_explanation' => '기입란에 이더리움 주소를 입력하신 다음 에어드랍을 신청하시거나 또는 스냅샷 상태를 확인할 수 있습니다.',
             'eth_address' => '이더리움 주소',
+            'eth_address_placeholder' => '0x... 이 주소는 귀하의 ETH 주소 여야합니다.',
             'no_private_key'=> '유의사항 : 개인 프라이빗 키를 입력하지 마십시오!',
             'eos_amount' => 'EOS 토큰 양',
             'status' => '상태',
@@ -41,11 +43,11 @@
             'missing_eth_address' => '4월 15일 01:00 UTC 시각에 EOS를 보유한 이더리움 주소를 기입하여 주십시오.',
             'eth_address_not_found' => '기입하신 이더리움 주소에 해당하는 스냅샷 정보를 찾지 못했습니다.',
             //'terms' => 'eosDAC <a href="https://eosdac.io/terms/">이용 약관</a>에 동의합니다.',
-            'submit' => '제출',
+            'submit' => '제출하기',
             //'error_terms' => '이용 약관에 대한 동의가 필요합니다.',
             'start_over' => '다시 시도',
-            'request_type_airdrop' => '에어드랍을 신청할 이더리움 주소',
-            'request_type_status' => '상태를 확인할 이더리움 주소',
+            'request_type_airdrop' => '이더리움 주소 에어드랍을 신청하기 ',
+            'request_type_status' => '이더리움 주소 스냅샷 확인하기',
             'already_requested' => '이 이더리움 주소의 에어드랍은 이미 신청되었거나 전송이 완료되었습니다.',
             'airdrop_request_success' => '에어드랍 신청이 성공적으로 접수되었습니다. 신청하신 이더리움 주소로 eosDAC 토큰이 전송되기까지 며칠 정도 소요될 수 있습니다. 감사합니다.'
             ),
@@ -210,7 +212,7 @@
         <form method="POST">
             <div class="form-group">
                 <label for="eth_address"><?php print $strings['eth_address']; ?></label>
-                <input type="text" class="form-control" name="eth_address" id="eth_address" placeholder="0x...">
+                <input type="text" class="form-control" name="eth_address" id="eth_address" placeholder="<?php print $strings['eth_address_placeholder']; ?>">
                 <small id="eth_address" class="form-text text-muted"><?php print $strings['no_private_key']; ?></small>
             </div>
             <?php
