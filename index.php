@@ -121,6 +121,8 @@
     print "<h1>" . $strings['welcome_message'] . '</h1>';
     print "<p>" . $strings['tool_explanation'] . '</p>';
 
+    $request_type = isset($_POST['request_type']) ? $_POST['request_type'] : 'status';
+
     // LOOK UP ADDRESS
     if ($action == 'lookup_eth_address') {
         $conn = mysqli_connect('', '', '', '');
@@ -134,7 +136,6 @@
         if ($eth_address == '') {
             $error = $strings['missing_eth_address'];
         }
-        $request_type = isset($_POST['request_type']) ? $_POST['request_type'] : 'status';
         if ($error == '') {
             $query = "SELECT * FROM eos_holders WHERE eth_address = '" . $eth_address . "' LIMIT 1";
             $result = mysqli_query($conn, $query);
@@ -214,7 +215,7 @@
             </div>
             <?php
             $checked = '';
-            if (isset($_POST['request_type']) && $_POST['request_type'] == 'status') {
+            if ($request_type == 'status') {
                 $checked = ' checked';
             }
             ?>
@@ -226,12 +227,12 @@
             </div>
             <?php
             $checked = '';
-            if (isset($_POST['request_type']) && $_POST['request_type'] == 'airdrop') {
+            if ($request_type == 'airdrop') {
                 $checked = ' checked';
             }
             ?>
             <div class="form-check">
-                <input class="form-check-input"<?php print $checked; ?> type="radio" name="request_type" id="request_type_airdrop" value="airdrop" checked>
+                <input class="form-check-input"<?php print $checked; ?> type="radio" name="request_type" id="request_type_airdrop" value="airdrop">
                 <label class="form-check-label" for="request_type_airdrop">
                 <?php print $strings['request_type_airdrop']; ?>
                 </label>
