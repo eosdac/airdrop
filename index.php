@@ -11,6 +11,7 @@
             'welcome_message' => 'Thank you for participating in the eosDAC airdrop!',
             'tool_explanation' => 'This simple form can be used to request a manual airdrop to your Ethereum address or review the status the airdrop for your Ethereum address',
             'eth_address' => 'ETH Address',
+            'no_private_key'=> 'Warning: please do not enter your private key!',
             'eos_amount' => 'EOS Amount',
             'status' => 'Status',
             'transaction_hash' => 'Transaction Hash',
@@ -32,6 +33,7 @@
             'welcome_message' => 'eosDAC 에어드랍에 참여해 주셔서 감사합니다!',
             'tool_explanation' => '기입란을 작성하셔서 이더리움 주소로 에어드랍을 신청하거나 에어드랍이 확정된 이더리움 주소 스냅샷 상태를 확인할 수 있습니다.',
             'eth_address' => '이더리움 주소',
+            'no_private_key'=> '유의사항 : 개인 프라이빗 키를 입력하지 마십시오!',
             'eos_amount' => 'EOS 토큰 양',
             'status' => '상태',
             'transaction_hash' => '거래 해시 내역',
@@ -207,19 +209,8 @@
         <form method="POST">
             <div class="form-group">
                 <label for="eth_address"><?php print $strings['eth_address']; ?></label>
-                <input type="text" class="form-control" name="eth_address" id="eth_address">
-            </div>
-            <?php
-            $checked = '';
-            if (isset($_POST['request_type']) && $_POST['request_type'] == 'airdrop') {
-                $checked = ' checked';
-            }
-            ?>
-            <div class="form-check">
-                <input class="form-check-input"<?php print $checked; ?> type="radio" name="request_type" id="request_type_airdrop" value="airdrop" checked>
-                <label class="form-check-label" for="request_type_airdrop">
-                <?php print $strings['request_type_airdrop']; ?>
-                </label>
+                <input type="text" class="form-control" name="eth_address" id="eth_address" placeholder="0x...">
+                <small id="eth_address" class="form-text text-muted"><?php print $strings['no_private_key']; ?></small>
             </div>
             <?php
             $checked = '';
@@ -231,6 +222,18 @@
                 <input class="form-check-input"<?php print $checked; ?> type="radio" name="request_type" id="request_type_status" value="status">
                 <label class="form-check-label" for="request_type_status">
                 <?php print $strings['request_type_status']; ?>
+                </label>
+            </div>
+            <?php
+            $checked = '';
+            if (isset($_POST['request_type']) && $_POST['request_type'] == 'airdrop') {
+                $checked = ' checked';
+            }
+            ?>
+            <div class="form-check">
+                <input class="form-check-input"<?php print $checked; ?> type="radio" name="request_type" id="request_type_airdrop" value="airdrop" checked>
+                <label class="form-check-label" for="request_type_airdrop">
+                <?php print $strings['request_type_airdrop']; ?>
                 </label>
             </div>
           <?php
