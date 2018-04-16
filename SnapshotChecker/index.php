@@ -55,7 +55,7 @@
             'airdrop_request_success' => '에어드랍 신청이 성공적으로 접수되었습니다. 신청하신 이더리움 주소로 eosDAC 토큰이 전송되기까지 며칠 정도 소요될 수 있습니다. 감사합니다.',
             'address_count' => '주소 개수',
             'total_eosdac' => '총 eosDAC',
-            'airdrop_status' => '공기 방울 최신 정보',
+            'airdrop_status' => '에어드랍 상태',
             ),
         );
 
