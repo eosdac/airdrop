@@ -1,7 +1,7 @@
 <?php
 
-$log_folder = 'AirdropperLogs';
-$log_file = './' . $log_folder . '/' . $argv[1];
+$log_folder = '../AirdropperLogs';
+$log_file = '/' . $log_folder . '/' . $argv[1];
 
 if (count($argv) == 1) {
     print "Please add a log file name such as Batch0100.log\n";
