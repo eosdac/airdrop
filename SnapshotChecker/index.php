@@ -26,7 +26,10 @@
             'request_type_airdrop' => 'Request Airdrop for this Address',
             'request_type_status' => 'Review Status of this Address',
             'already_requested' => 'The airdrop for this address has already been requested or collected.',
-            'airdrop_request_success' => 'Thank you! Your airdrop request has been successfully recorded. Please note it may take several days before your tokens are batched and sent to you.'
+            'airdrop_request_success' => 'Thank you! Your airdrop request has been successfully recorded. Please note it may take several days before your tokens are batched and sent to you.',
+            'address_count' => 'Address Count',
+            'total_eosdac' => 'Total eosDAC',
+            'airdrop_status' => 'Airdrop Status',
             ),
         'kor' => array(
             'language' => '한국어',
@@ -49,7 +52,10 @@
             'request_type_airdrop' => '이더리움 주소 에어드랍을 신청하기 ',
             'request_type_status' => '이더리움 주소 스냅샷 확인하기',
             'already_requested' => '이 이더리움 주소의 에어드랍은 이미 신청되었거나 전송이 완료되었습니다.',
-            'airdrop_request_success' => '에어드랍 신청이 성공적으로 접수되었습니다. 신청하신 이더리움 주소로 eosDAC 토큰이 전송되기까지 며칠 정도 소요될 수 있습니다. 감사합니다.'
+            'airdrop_request_success' => '에어드랍 신청이 성공적으로 접수되었습니다. 신청하신 이더리움 주소로 eosDAC 토큰이 전송되기까지 며칠 정도 소요될 수 있습니다. 감사합니다.',
+            'address_count' => '주소 개수',
+            'total_eosdac' => '총 eosDAC',
+            'airdrop_status' => '공기 방울 최신 정보',
             ),
         );
 
@@ -127,7 +133,7 @@
 
     // LOOK UP ADDRESS
     if ($action == 'lookup_eth_address') {
-        $conn = mysqli_connect('', '', '', '');
+        include 'dbconnect.php';
         /*
         $agree_to_terms = isset($_POST['agree_to_terms']) ? $_POST['agree_to_terms'] : '';
         if ($agree_to_terms != 'yes') {
@@ -182,8 +188,6 @@
             } else {
                 $error = $strings['eth_address_not_found'];
             }
-            $result->close();
-            mysqli_close($conn);
         }
         if ($error != '') {
             $action = '';    
@@ -196,6 +200,22 @@
                 <button type="submit" class="btn btn-primary"><?php print $strings['start_over']; ?></button>
             </form>
             <?php
+
+            print "<h2>" . $strings['airdrop_status'] . "</h2>";
+
+            $query = "SELECT count(*) as address_count, status, sum(eos_amount) as total_eos FROM eos_holders GROUP
+ BY status";
+            $result = mysqli_query($conn, $query);
+            print '<table class="table"><thead><tr><th>' . $strings['address_count'] . '</th><th>' . $strings['stat
+us'] . '</th><th>' . $strings['total_eosdac'] . '</th></tr></thead>';
+            while($value = $result->fetch_array(MYSQLI_ASSOC)){
+                print '<tr>';
+                foreach ($value as $key => $element) {
+                    print '<td>' . $element . '</td>';
+                }
+                print '</tr>';
+            }
+            print '</table>';
         }
     }
 
