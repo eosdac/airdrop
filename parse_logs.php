@@ -21,8 +21,10 @@ if (($handle = fopen($log_file, "r")) !== FALSE) {
     while (($line = fgets($handle)) !== false) {
         $raw_line_data = explode(' ',$line);
         //var_dump($raw_line_data);
-        if (trim($raw_line_data[2]) == 'trans' && trim($raw_line_data[4]) == 'TO:') {
-            $line_data['address'] = trim($raw_line_data[7]);
+        if (count($raw_line_data) > 7) {
+            if (trim($raw_line_data[2]) == 'trans' && trim($raw_line_data[4]) == 'TO:') {
+                $line_data['address'] = trim($raw_line_data[7]);
+            }
         }
         if (trim($raw_line_data[0]) == '"transactionHash":') {
             $line_data['transaction_hash'] = trim($raw_line_data[1], "\" ,\t\n\r");
