@@ -29,7 +29,7 @@
             'airdrop_request_success' => 'Thank you! Your airdrop request has been successfully recorded. Please note it may take several days before your tokens are batched and sent to you.',
             'address_count' => 'Address Count',
             'total_eosdac' => 'Total eosDAC',
-            'airdrop_status' => 'Airdrop Status',
+            'airdrop_status' => 'Overall Airdrop Progress So Far',
             ),
         'kor' => array(
             'language' => '한국어',
@@ -56,6 +56,32 @@
             'address_count' => '주소 개수',
             'total_eosdac' => '총 eosDAC',
             'airdrop_status' => '에어드랍 상태',
+            ),
+        'ja' => array(
+            'language' => '日本語',
+            'page_title' => 'eosDAC 空投小工具',
+            'welcome_message' => '感谢您参与eosDAC的空投活动!',
+            'tool_explanation' => '这个小工具可以用来手动操作空投到您的以太坊地址，或者检查您的以太坊地址目前的空投状态。',
+            'eth_address' => 'ETH　地址',
+            'eth_address_placeholder' => ' 0x... （这里应填写您的以太坊钱包地址)',
+            'no_private_key'=> '警告:用户注意请勿填写或透露您的私钥!',
+            'eos_amount' => 'EOS 数量',
+            'status' => '状态',
+            'transaction_hash' => '交易哈希',
+            'view_on_etherscan' => ' 在etherscan查看您的交易',
+            'missing_eth_address' => '请填写在快照时（4.15 01;00;00UTC）您持有EOS的的以太坊地址',
+            'eth_address_not_found' => '很抱歉，无法在快照中找到您所提供以太坊地址',
+            //'terms' => '我同意 <a href="https://eosdac.io/terms/">terms of service</a>',
+            'submit' => '提交',
+            //'error_terms' => '您需要同意服务条款.',
+            'start_over' => '重新开始',
+            'request_type_airdrop' => '请求空投到本地址',
+            'request_type_status' => '审核该地址状态',
+            'already_requested' => '本地址的空投请求已提交',
+            'airdrop_request_success' => '非常感谢！您的空投请求已经被成功记录。 温馨提示：代币的打包及到账可能会花费几天时间，请您耐心等候。',
+            'address_count' => '地址计数',
+            'total_eosdac' => '总 eosDAC数',
+            'airdrop_status' => '空投状态',
             ),
         );
 
@@ -206,8 +232,7 @@
             $query = "SELECT count(*) as address_count, status, sum(eos_amount) as total_eos FROM eos_holders GROUP
  BY status";
             $result = mysqli_query($conn, $query);
-            print '<table class="table"><thead><tr><th>' . $strings['address_count'] . '</th><th>' . $strings['stat
-us'] . '</th><th>' . $strings['total_eosdac'] . '</th></tr></thead>';
+            print '<table class="table"><thead><tr><th>' . $strings['address_count'] . '</th><th>' . $strings['status'] . '</th><th>' . $strings['total_eosdac'] . '</th></tr></thead>';
             while($value = $result->fetch_array(MYSQLI_ASSOC)){
                 print '<tr>';
                 foreach ($value as $key => $element) {
