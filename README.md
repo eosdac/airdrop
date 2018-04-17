@@ -1,60 +1,6 @@
-# Snapshot and Airdrop Tools for validating and updating our airdrop data
+# airdrop
+Code for the eosDAC airdrop of tokens onto the EOSIO distribution. Includes the eosDAC erc20 token code. This is standard with the exception of freezing from June 1st 2018 11:59PM
 
-airdrop.sql:
+The wallet exports are the state of the EOS distribution as at the end of the period noted in the title e.g wallet_export_267 is the distribution as per end of EOS token distribution period 267. wallet_export_300 will be used as the master snapshot.
 
-* Schema for airdrop MySQL database
-
-index.php:
-
-* Simple page for querying the database.
-* Be sure to add mysql credentials as needed.
-
-create_sql.php:
-
-* Clears the database and creates INSERT statements to populate the data based on a snapshot.
-
-export_requested_to_be_processed.sql:
-
-* Used to export a csv file of requested airdrops below 100 EOS.
-* Example:
-    * `mysql -u <user> -p <db> < export_requested_to_be_processed.sql | sed 's/\t/,/g' > requests.csv`
-
-parse_logs.php:
-
-* Used to parse the logs and create update sql statements.
-
-parse_log_sequence.sh:
-
-* Used to process a batch of log files.
-* Example:
-    * `./parse_log_sequence.sh 51 100`
-    * `mysql -u <user> -p <db> < update.sql`
-
-# Procedures
-
-## Updating the Airdrop Tool Code.
-
-1) Commit to git and push.
-1) Login to the webserver.
-1) cd airdrop
-1) git pull
-1) cd SnapshotChecker
-1) `sudo cp index.php /var/www/html/airdrop/index_hidden.php`
-1) Test at https://eosdac.io/airdrop/index_hidden.php
-1) If needed, make changes and go back to step 1.
-1) When satisfied `sudo cp index.php /var/www/html/airdrop/index.php` 
-
-## Updating the Airdrop Data with COMPLETED transactions
-
-1) Login to the webserver.
-1) `mysql -u <user> -p <db>`
-1) `use airdrop;`
-1) Run `select count(*), status from eos_holders GROUP BY status;` and note the output
-1) Login to the webserver in a second window.
-1) cd airdrop
-1) git pull
-1) cd SnapshotChecker
-1) `./parse_log_sequence.sh 101 200` (or whatever batch amount you want to use)
-1) View update.sql to make sure it's valid.
-1) `mysql -u <user> -p <db> < update.sql`
-1) Run `select count(*), status from eos_holders GROUP BY status;` in the other window and check the results
+eosDAC.json is the abi file for the eosDAC ERC20 token which will be used by the web3.js airdrop code 
