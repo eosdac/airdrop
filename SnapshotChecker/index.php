@@ -9,7 +9,7 @@
             'language' => 'English',
             'page_title' => 'eosDAC Airdrop Tool',
             'welcome_message' => 'Thank you for participating in the eosDAC airdrop!',
-            'tool_explanation' => 'This simple form can be used to request a manual airdrop to your Ethereum address or review the status the airdrop for your Ethereum address',
+            'tool_explanation' => 'This simple form can be used to request a manual airdrop to your Ethereum address or review the status of the airdrop for your Ethereum address',
             'eth_address' => 'ETH Address',
             'eth_address_placeholder' => ' 0x... (this should be your public ETH address)',
             'no_private_key'=> 'Warning: please do not enter your private key!',
@@ -30,6 +30,11 @@
             'address_count' => 'Address Count',
             'total_eosdac' => 'Total eosDAC',
             'airdrop_status' => 'Overall Airdrop Progress So Far',
+            'addresses' => 'Addresses',
+            'eosdac_tokens' => 'eosDAC Tokens',
+            'requested_explanation' => 'Your airdrop tokens are in the queue to be delivered to you by May 15th. Please be patient for delivery.',
+            'collected_explanation' => 'Your wallet should already contain your eosDAC tokens.',
+            'unclaimed_explanation' => 'This address has less than 100 EOS or is an unclaimed exchange address.',
             ),
         'kor' => array(
             'language' => '한국어',
@@ -55,7 +60,12 @@
             'airdrop_request_success' => '에어드랍 신청이 성공적으로 접수되었습니다. 신청하신 이더리움 주소로 eosDAC 토큰이 전송되기까지 며칠 정도 소요될 수 있습니다. 감사합니다.',
             'address_count' => '주소 개수',
             'total_eosdac' => '총 eosDAC',
-            'airdrop_status' => '에어드랍 상태',
+            'airdrop_status' => '현재까지 에어드랍 진행 상태',
+            'addresses' => '주소',
+            'eosdac_tokens' => 'eosDAC 토큰',
+            'requested_explanation' => '귀하의 eosDAC 토큰은 5월 15일 내에 에어드랍 될 예정입니다. 기다려 주셔서 감사합니다.',
+            'collected_explanation' => '귀하의 지갑에 이미 eosDAC 토큰이 있습니다.',
+            'unclaimed_explanation' => '이 주소는 EOS가 100개 미만이거나 미접속 거래소의 주소입니다.',
             ),
         'zh' => array(
             'language' => '中文',
@@ -82,6 +92,11 @@
             'address_count' => '地址计数',
             'total_eosdac' => '总 eosDAC数',
             'airdrop_status' => '空投状态',
+            'addresses' => '地址',
+            'eosdac_tokens' => 'eosDAC 令牌',
+            'requested_explanation' => '5月15日前，你的空投令牌將排隊等候發送給你。 請耐心等待發貨。',
+            'collected_explanation' => '你的錢包應該已經包含你的eosDAC令牌。',
+            'unclaimed_explanation' => '該地址的EOS少於100或者是無人認領的交換地址。',
             ),
         );
 
@@ -176,12 +191,18 @@
             $header = '<table class="table"><thead><tr><th>' . $strings['eth_address'] . '</th><th>' . $strings['eos_amount'] . '</th><th>' . $strings['status'] . '</th><th>' . $strings['transaction_hash'] . '</th></tr></thead>';
             $has_results = 0;
             $info = '';
+            $status = '';
             while($value = $result->fetch_array(MYSQLI_ASSOC)){
+                $status = $value['status'];
+                if ($status == '') {
+                    $status = 'UNCLAIMED';
+                }
+
                 if ($request_type == 'airdrop') {
                     if ($value['status'] == '') {
                         $update_query = "UPDATE eos_holders SET status = 'REQUESTED' WHERE eth_address = '" . $eth_address . "' AND status = ''";
                         mysqli_query($conn, $update_query);
-                        $value['status'] = 'REQUESTED';
+                        $status = $value['status'] = 'REQUESTED';
                         $info = 'airdrop_request_success';
                     } else {
                         $info = 'already_requested';
@@ -211,6 +232,17 @@
             }
             if ($has_results) {
                 print '</table>';
+
+                if ($status == 'REQUESTED') {
+                    print '<p><strong>REQUESTED</strong>: ' . $strings['requested_explanation'] . '</p>';
+                }
+                if ($status == 'COLLECTED') {
+                    print '<p><strong>COLLECTED</strong>: ' . $strings['collected_explanation'] . '</p>';
+                }
+                if ($status == 'UNCLAIMED') {
+                    print '<p><strong>UNCLAIMED</strong>: ' . $strings['unclaimed_explanation'] . '</p>';
+                }
+
             } else {
                 $error = $strings['eth_address_not_found'];
             }
@@ -229,18 +261,92 @@
 
             print "<h2>" . $strings['airdrop_status'] . "</h2>";
 
-            $query = "SELECT count(*) as address_count, status, sum(eos_amount) as total_eos FROM eos_holders GROUP
- BY status";
+            $total_addresses = 0;
+            $total_addresses_collected = 0;
+            $total_addresses_requested = 0;
+            $total_addresses_blank = 0;
+
+            $total_eos = 0;
+            $total_eos_collected = 0;
+            $total_eos_requested = 0;
+            $total_eos_blank = 0;
+
+            $query = "SELECT status, count(*) as address_count, sum(eos_amount) as total_eos FROM eos_holders GROUP BY status";
             $result = mysqli_query($conn, $query);
-            print '<table class="table"><thead><tr><th>' . $strings['address_count'] . '</th><th>' . $strings['status'] . '</th><th>' . $strings['total_eosdac'] . '</th></tr></thead>';
+            $table = '<table class="table"><thead><tr><th>' . $strings['status'] . '</th><th>' . $strings['address_count'] . '</th><th>' . $strings['total_eosdac'] . '</th></tr></thead>';
             while($value = $result->fetch_array(MYSQLI_ASSOC)){
-                print '<tr>';
-                foreach ($value as $key => $element) {
-                    print '<td>' . $element . '</td>';
+                $total_addresses += $value['address_count'];
+                switch ($value['status']) {
+                    case 'REQUESTED':
+                        $total_addresses_requested += $value['address_count'];
+                        break;
+                    case 'COLLECTED':
+                        $total_addresses_collected += $value['address_count'];
+                        break;
+                    default:
+                        $total_addresses_blank += $value['address_count'];
+                        break;
                 }
-                print '</tr>';
+                $total_eos += $value['total_eos'];
+                switch ($value['status']) {
+                    case 'REQUESTED':
+                        $total_eos_requested += $value['total_eos'];
+                        break;
+                    case 'COLLECTED':
+                        $total_eos_collected += $value['total_eos'];
+                        break;
+                    default:
+                        $total_eos_blank += $value['total_eos'];
+                        break;
+                }
+                $status = $value['status'];
+                if ($status == '') {
+                    $status = 'UNCLAIMED';
+                }
+
+                $table .= '<tr><td>' . $status . '</td><td>' . $value['address_count'] . '</td><td>' . $value['total_eos'] . '</td>';
+                $table .= '</tr>';
             }
-            print '</table>';
+            $table .= '</table>';
+
+            $total_addresses_collected_percent = $total_addresses_collected / $total_addresses;
+            $total_addresses_collected_percent = number_format( $total_addresses_collected_percent * 100, 0 );
+            $total_addresses_requested_percent = $total_addresses_requested / $total_addresses;
+            $total_addresses_requested_percent = number_format( $total_addresses_requested_percent * 100, 0 );
+            $total_addresses_blank_percent = $total_addresses_blank / $total_addresses;
+            $total_addresses_blank_percent = number_format( $total_addresses_blank_percent * 100, 0 );
+            if ($total_addresses_collected_percent + $total_addresses_requested_percent + $total_addresses_blank_percent > 100) {
+                $total_addresses_blank_percent -= 1;
+            }
+
+            $total_eos_collected_percent = $total_eos_collected / $total_eos;
+            $total_eos_collected_percent = number_format( $total_eos_collected_percent * 100, 0 );
+            $total_eos_requested_percent = $total_eos_requested / $total_eos;
+            $total_eos_requested_percent = number_format( $total_eos_requested_percent * 100, 0 );
+            $total_eos_blank_percent = $total_eos_blank / $total_eos;
+            $total_eos_blank_percent = number_format( $total_eos_blank_percent * 100, 0 );
+            if ($total_eos_collected_percent + $total_eos_requested_percent + $total_eos_blank_percent > 100) {
+                $total_eos_blank_percent -= 1;
+            }
+            ?>
+
+            <h3><?php print $strings['addresses']; ?></h3>
+            <div class="progress">
+              <div class="progress-bar progress-bar-success" role="progressbar" style="width: <?php print $total_addresses_collected_percent; ?>%" aria-valuenow="<?php print $total_addresses_collected_percent; ?>" aria-valuemin="0" aria-valuemax="100">COLLECTED</div>
+              <div class="progress-bar" role="progressbar" style="width: <?php print $total_addresses_requested_percent; ?>%" aria-valuenow="<?php print $total_addresses_requested_percent; ?>" aria-valuemin="0" aria-valuemax="100">REQUESTED</div>
+              <div class="progress-bar progress-bar-info" role="progressbar" style="width: <?php print $total_addresses_blank_percent; ?>%" aria-valuenow="<?php print $total_addresses_blank_percent; ?>" aria-valuemin="0" aria-valuemax="100">UNCLAIMED</div>
+            </div>
+
+            <h3><?php print $strings['eosdac_tokens']; ?></h3>
+            <div class="progress">
+              <div class="progress-bar progress-bar-success" role="progressbar" style="width: <?php print $total_eos_collected_percent; ?>%" aria-valuenow="<?php print $total_eos_collected_percent; ?>" aria-valuemin="0" aria-valuemax="100">COLLECTED</div>
+              <div class="progress-bar" role="progressbar" style="width: <?php print $total_eos_requested_percent; ?>%" aria-valuenow="<?php print $total_eos_requested_percent; ?>" aria-valuemin="0" aria-valuemax="100">REQUESTED</div>
+              <div class="progress-bar progress-bar-info" role="progressbar" style="width: <?php print $total_eos_blank_percent; ?>%" aria-valuenow="<?php print $total_eos_blank_percent; ?>" aria-valuemin="0" aria-valuemax="100">UNCLAIMED</div>
+            </div>
+            <?php
+
+            print $table;
+
         }
     }
 
