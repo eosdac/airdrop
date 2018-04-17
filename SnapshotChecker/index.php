@@ -57,8 +57,8 @@
             'total_eosdac' => '총 eosDAC',
             'airdrop_status' => '에어드랍 상태',
             ),
-        'ja' => array(
-            'language' => '日本語',
+        'zh' => array(
+            'language' => '中文',
             'page_title' => 'eosDAC 空投小工具',
             'welcome_message' => '感谢您参与eosDAC的空投活动!',
             'tool_explanation' => '这个小工具可以用来手动操作空投到您的以太坊地址，或者检查您的以太坊地址目前的空投状态。',
