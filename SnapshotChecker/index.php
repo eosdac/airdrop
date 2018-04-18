@@ -4,23 +4,12 @@
 
 include 'dbconnect.php';
 include 'include_language.php';
+include 'include_header.php';
 
 $action = isset($_POST['form_action']) ? $_POST['form_action'] : '';
 $error = '';
 
 ?>
-<html>
- <head>
-  <title><?php print $strings['page_title']; ?></title>
-
-  <meta charset="utf-8">
-
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-
-</head>
-<body>
 
 <!-- Copied from site, slightly modified -->
 <header class="banner navbar navbar-default navbar-static-top " role="banner">
@@ -72,8 +61,6 @@ $error = '';
     print "<h1>" . $strings['welcome_message'] . '</h1>';
     print "<p>" . $strings['tool_explanation'] . '</p>';
 
-    $request_type = isset($_POST['request_type']) ? $_POST['request_type'] : 'status';
-
     // LOOK UP ADDRESS
     if ($action == 'lookup_eth_address') {
         /*
@@ -98,24 +85,15 @@ $error = '';
                 if ($status == '') {
                     $status = 'UNCLAIMED';
                 }
-
-                if ($request_type == 'airdrop') {
-                    if ($value['status'] == '') {
-                        $update_query = "UPDATE eos_holders SET status = 'REQUESTED' WHERE eth_address = '" . $eth_address . "' AND status = ''";
-                        mysqli_query($conn, $update_query);
-                        $status = 'REQUESTED';
-                        $info = 'airdrop_request_success';
-                    } else {
-                        $info = 'already_requested';
-                    }
+                if ($value['status'] == '' && $value['eos_amount'] < 100) {
+                    $update_query = "UPDATE eos_holders SET status = 'REQUESTED' WHERE eth_address = '" . $eth_address . "' AND status = ''";
+                    mysqli_query($conn, $update_query);
+                    $status = 'REQUESTED';
+                    $info = 'airdrop_request_success';
                 }
                 if ($has_results == 0) {
                     if ($info != '') {
-                        $info_type = 'info';
-                        if ($info == 'airdrop_request_success') {
-                            $info_type = 'success';
-                        }
-                        print "<div class=\"alert alert-" . $info_type . "\" role=\"alert\">";
+                        print "<div class=\"alert alert-success\" role=\"alert\">";
                         print $strings[$info];
                         print "</div>";
                     }
@@ -174,32 +152,6 @@ $error = '';
                 <input type="text" class="form-control" name="eth_address" id="eth_address" placeholder="<?php print $strings['eth_address_placeholder']; ?>">
                 <small id="eth_address" class="form-text text-muted"><?php print $strings['no_private_key']; ?></small>
             </div>
-            <?php
-            $checked = '';
-            if ($request_type == 'status') {
-                $checked = ' checked';
-            }
-            ?>
-            <div class="form-check">
-                <input class="form-check-input"<?php print $checked; ?> type="radio" name="request_type" id="request_type_status" value="status">
-                <label class="form-check-label" for="request_type_status">
-                <?php print $strings['request_type_status']; ?>
-                </label>
-            </div>
-            <?php
-            $checked = '';
-            if ($request_type == 'airdrop') {
-                $checked = ' checked';
-            }
-            ?>
-            <div class="form-check">
-                <input class="form-check-input"<?php print $checked; ?> type="radio" name="request_type" id="request_type_airdrop" value="airdrop">
-                <label class="form-check-label" for="request_type_airdrop">
-                <?php print $strings['request_type_airdrop']; ?>
-                </label>
-            </div>
-          <?php
-          ?>
             <br />
             <input type="hidden" name="form_action" value="lookup_eth_address">
             <input type="hidden" name="lang" value="<?php print $lang; ?>">
