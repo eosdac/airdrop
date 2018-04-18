@@ -1,0 +1,31 @@
+{
+  "kor": {
+    "language": "한국어",
+    "page_title": "eosDAC 에어드랍 툴",
+    "welcome_message": "eosDAC 에어드랍에 참여해 주셔서 감사합니다!",
+    "tool_explanation": "기입란에 이더리움 주소를 입력하신 다음 에어드랍을 신청하시거나 또는 스냅샷 상태를 확인할 수 있습니다.",
+    "eth_address": "이더리움 주소",
+    "eth_address_placeholder": "0x... 이 주소는 귀하의 ETH 주소 여야합니다.",
+    "no_private_key": "유의사항 : 개인 프라이빗 키를 입력하지 마십시오!",
+    "eos_amount": "EOS 토큰 양",
+    "status": "상태",
+    "transaction_hash": "거래 해시 내역",
+    "view_on_etherscan": "이더스캔으로 거래 내역 보기",
+    "missing_eth_address": "4월 15일 01:00 UTC 시각에 EOS를 보유한 이더리움 주소를 기입하여 주십시오.",
+    "eth_address_not_found": "기입하신 이더리움 주소에 해당하는 스냅샷 정보를 찾지 못했습니다.",
+    "submit": "제출하기",
+    "start_over": "다시 시도",
+    "request_type_airdrop": "이더리움 주소 에어드랍을 신청하기 ",
+    "request_type_status": "이더리움 주소 스냅샷 확인하기",
+    "already_requested": "이 이더리움 주소의 에어드랍은 이미 신청되었거나 전송이 완료되었습니다.",
+    "airdrop_request_success": "에어드랍 신청이 성공적으로 접수되었습니다. 신청하신 이더리움 주소로 eosDAC 토큰이 전송되기까지 며칠 정도 소요될 수 있습니다. 감사합니다.",
+    "address_count": "주소 개수",
+    "total_eosdac": "총 eosDAC",
+    "airdrop_status": "현재까지 에어드랍 진행 상태",
+    "addresses": "주소",
+    "eosdac_tokens": "eosDAC 토큰",
+    "requested_explanation": "귀하의 eosDAC 토큰은 5월 15일 내에 에어드랍 될 예정입니다. 기다려 주셔서 감사합니다.",
+    "collected_explanation": "귀하의 지갑에 이미 eosDAC 토큰이 있습니다.",
+    "unclaimed_explanation": "이 주소는 EOS가 100개 미만이거나 미접속 거래소의 주소입니다."
+  }
+}

@@ -3,109 +3,24 @@
 //error_reporting(E_ALL);
 //ini_set('display_errors', 1);
 
-    // config
-    $_lang = array(
-        'en' => array(
-            'language' => 'English',
-            'page_title' => 'eosDAC Airdrop Tool',
-            'welcome_message' => 'Thank you for participating in the eosDAC airdrop!',
-            'tool_explanation' => 'This simple form can be used to request a manual airdrop to your Ethereum address or review the status of the airdrop for your Ethereum address',
-            'eth_address' => 'ETH Address',
-            'eth_address_placeholder' => ' 0x... (this should be your public ETH address)',
-            'no_private_key'=> 'Warning: please do not enter your private key!',
-            'eos_amount' => 'EOS Amount',
-            'status' => 'Status',
-            'transaction_hash' => 'Transaction Hash',
-            'view_on_etherscan' => 'View transaction on etherscan',
-            'missing_eth_address' => 'Please enter your Ethereum address which held EOS on April 15th at 01:00 UTC.',
-            'eth_address_not_found' => 'We were unable to find the Ethereum address you supplied in the snapshot data.',
-            //'terms' => 'I agree to the eosDAC <a href="https://eosdac.io/terms/">terms of service</a>',
-            'submit' => 'Submit',
-            //'error_terms' => 'You must agree to the terms of service.',
-            'start_over' => 'Start over',
-            'request_type_airdrop' => 'Request Airdrop for this Address',
-            'request_type_status' => 'Review Status of this Address',
-            'already_requested' => 'The airdrop for this address has already been requested or collected.',
-            'airdrop_request_success' => 'Thank you! Your airdrop request has been successfully recorded. Please note it may take several days before your tokens are batched and sent to you.',
-            'address_count' => 'Address Count',
-            'total_eosdac' => 'Total eosDAC',
-            'airdrop_status' => 'Overall Airdrop Progress So Far',
-            'addresses' => 'Addresses',
-            'eosdac_tokens' => 'eosDAC Tokens',
-            'requested_explanation' => 'Your airdrop tokens are in the queue to be delivered to you by May 15th. Please be patient for delivery.',
-            'collected_explanation' => 'Your wallet should already contain your eosDAC tokens.',
-            'unclaimed_explanation' => 'This address has less than 100 EOS or is an unclaimed exchange address.',
-            ),
-        'kor' => array(
-            'language' => '한국어',
-            'page_title' => 'eosDAC 에어드랍 툴',
-            'welcome_message' => 'eosDAC 에어드랍에 참여해 주셔서 감사합니다!',
-            'tool_explanation' => '기입란에 이더리움 주소를 입력하신 다음 에어드랍을 신청하시거나 또는 스냅샷 상태를 확인할 수 있습니다.',
-            'eth_address' => '이더리움 주소',
-            'eth_address_placeholder' => '0x... 이 주소는 귀하의 ETH 주소 여야합니다.',
-            'no_private_key'=> '유의사항 : 개인 프라이빗 키를 입력하지 마십시오!',
-            'eos_amount' => 'EOS 토큰 양',
-            'status' => '상태',
-            'transaction_hash' => '거래 해시 내역',
-            'view_on_etherscan' => '이더스캔으로 거래 내역 보기',
-            'missing_eth_address' => '4월 15일 01:00 UTC 시각에 EOS를 보유한 이더리움 주소를 기입하여 주십시오.',
-            'eth_address_not_found' => '기입하신 이더리움 주소에 해당하는 스냅샷 정보를 찾지 못했습니다.',
-            //'terms' => 'eosDAC <a href="https://eosdac.io/terms/">이용 약관</a>에 동의합니다.',
-            'submit' => '제출하기',
-            //'error_terms' => '이용 약관에 대한 동의가 필요합니다.',
-            'start_over' => '다시 시도',
-            'request_type_airdrop' => '이더리움 주소 에어드랍을 신청하기 ',
-            'request_type_status' => '이더리움 주소 스냅샷 확인하기',
-            'already_requested' => '이 이더리움 주소의 에어드랍은 이미 신청되었거나 전송이 완료되었습니다.',
-            'airdrop_request_success' => '에어드랍 신청이 성공적으로 접수되었습니다. 신청하신 이더리움 주소로 eosDAC 토큰이 전송되기까지 며칠 정도 소요될 수 있습니다. 감사합니다.',
-            'address_count' => '주소 개수',
-            'total_eosdac' => '총 eosDAC',
-            'airdrop_status' => '현재까지 에어드랍 진행 상태',
-            'addresses' => '주소',
-            'eosdac_tokens' => 'eosDAC 토큰',
-            'requested_explanation' => '귀하의 eosDAC 토큰은 5월 15일 내에 에어드랍 될 예정입니다. 기다려 주셔서 감사합니다.',
-            'collected_explanation' => '귀하의 지갑에 이미 eosDAC 토큰이 있습니다.',
-            'unclaimed_explanation' => '이 주소는 EOS가 100개 미만이거나 미접속 거래소의 주소입니다.',
-            ),
-        'zh' => array(
-            'language' => '中文',
-            'page_title' => 'eosDAC 空投小工具',
-            'welcome_message' => '感谢您参与eosDAC的空投活动!',
-            'tool_explanation' => '这个小工具可以用来手动操作空投到您的以太坊地址，或者检查您的以太坊地址目前的空投状态。',
-            'eth_address' => 'ETH　地址',
-            'eth_address_placeholder' => ' 0x... （这里应填写您的以太坊钱包地址)',
-            'no_private_key'=> '警告:用户注意请勿填写或透露您的私钥!',
-            'eos_amount' => 'EOS 数量',
-            'status' => '状态',
-            'transaction_hash' => '交易哈希',
-            'view_on_etherscan' => ' 在etherscan查看您的交易',
-            'missing_eth_address' => '请填写在快照时（4.15 01;00;00UTC）您持有EOS的的以太坊地址',
-            'eth_address_not_found' => '很抱歉，无法在快照中找到您所提供以太坊地址',
-            //'terms' => '我同意 <a href="https://eosdac.io/terms/">terms of service</a>',
-            'submit' => '提交',
-            //'error_terms' => '您需要同意服务条款.',
-            'start_over' => '重新开始',
-            'request_type_airdrop' => '请求空投到本地址',
-            'request_type_status' => '审核该地址状态',
-            'already_requested' => '本地址的空投请求已提交',
-            'airdrop_request_success' => '非常感谢！您的空投请求已经被成功记录。 温馨提示：代币的打包及到账可能会花费几天时间，请您耐心等候。',
-            'address_count' => '地址计数',
-            'total_eosdac' => '总 eosDAC数',
-            'airdrop_status' => '当前空投进展',
-            'addresses' => '地址',
-            'eosdac_tokens' => 'eosDAC代币',
-            'requested_explanation' => '您的空投代币将在5月15日前交付给您。请耐心等待。.',
-            'collected_explanation' => '你的钱包应该已经包含了你的eosDAC代币.',
-            'unclaimed_explanation' => '此地址可能在快照少于100个EOS或在一个无人认领的交易所地址。',
-            ),
-        );
-
     $lang = 'en';
-    if (isset($_POST['lang']) && array_key_exists($_POST['lang'], $_lang)) {
+    $language_files = array_diff(scandir('./lang'), array('.', '..'));
+    if (isset($_POST['lang']) && in_array($_POST['lang'] . '.json', $language_files)) {
         $lang = $_POST['lang'];
     }
-
-    $strings = $_lang[$lang];
+    $supported_languages = array();
+    $strings = array();
+    foreach($language_files as $language_file) {
+        // note: This is safe because $language_files can only be set via scandir('./lang')
+        $language_file_json = file_get_contents('./lang/' . $language_file);
+        $langage_data = json_decode($language_file_json, true);
+        reset($langage_data);
+        $langauge_code = key($langage_data);
+        $supported_languages[$langauge_code] = $langage_data[$langauge_code]['language'];
+        if ($lang == $langauge_code) {
+            $strings = $langage_data[$langauge_code];
+        }
+    }
 
     $action = isset($_POST['form_action']) ? $_POST['form_action'] : '';
     $error = '';
@@ -156,12 +71,12 @@
         <input type="hidden" name="form_action" value="">
         <select name="lang" onchange="this.form.submit()">
         <?php
-        foreach ($_lang as $key => $language_strings) {
+        foreach ($supported_languages as $language_code => $language_description) {
             $selected = '';
-            if ($lang == $key) {
+            if ($lang == $language_code) {
                 $selected = ' selected';
             }
-            print "<option" . $selected . " value=\"" . $key . "\">" . $language_strings['language'] . "</option>";
+            print "<option" . $selected . " value=\"" . $language_code . "\">" . $language_description . "</option>";
         }
         ?>
         </select>

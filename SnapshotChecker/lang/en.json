@@ -1,0 +1,31 @@
+{
+  "en": {
+    "language": "English",
+    "page_title": "eosDAC Airdrop Tool",
+    "welcome_message": "Thank you for participating in the eosDAC airdrop!",
+    "tool_explanation": "This simple form can be used to request a manual airdrop to your Ethereum address or review the status of the airdrop for your Ethereum address",
+    "eth_address": "ETH Address",
+    "eth_address_placeholder": " 0x... (this should be your public ETH address)",
+    "no_private_key": "Warning: please do not enter your private key!",
+    "eos_amount": "EOS Amount",
+    "status": "Status",
+    "transaction_hash": "Transaction Hash",
+    "view_on_etherscan": "View transaction on etherscan",
+    "missing_eth_address": "Please enter your Ethereum address which held EOS on April 15th at 01:00 UTC.",
+    "eth_address_not_found": "We were unable to find the Ethereum address you supplied in the snapshot data.",
+    "submit": "Submit",
+    "start_over": "Start over",
+    "request_type_airdrop": "Request Airdrop for this Address",
+    "request_type_status": "Review Status of this Address",
+    "already_requested": "The airdrop for this address has already been requested or collected.",
+    "airdrop_request_success": "Thank you! Your airdrop request has been successfully recorded. Please note it may take several days before your tokens are batched and sent to you.",
+    "address_count": "Address Count",
+    "total_eosdac": "Total eosDAC",
+    "airdrop_status": "Overall Airdrop Progress So Far",
+    "addresses": "Addresses",
+    "eosdac_tokens": "eosDAC Tokens",
+    "requested_explanation": "Your airdrop tokens are in the queue to be delivered to you by May 15th. Please be patient for delivery.",
+    "collected_explanation": "Your wallet should already contain your eosDAC tokens.",
+    "unclaimed_explanation": "This address has less than 100 EOS or is an unclaimed exchange address."
+  }
+}
