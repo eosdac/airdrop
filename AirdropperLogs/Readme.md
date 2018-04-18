@@ -6,6 +6,8 @@ Noted Issues :
 2. Batch 0031 had timeout - however all transactions appear to have been loaded
 3. Batch 0102 had wrong nonce set and rerun caused erasure of logs - Believe run but Need to check addresses from this batch
 4. Batch 0107 also logged batch 0108 because counter wasn't advanced.
+5. Batch 0485 also logged batch 0486 because counter wasn't advanced
+6. Batch 0499 has an unexpected nonce issue - Will need to be picked up during end checks.. 
 
 
 
