@@ -1,0 +1,28 @@
+{
+  "es": {
+    "language": "Spanish",
+    "page_title": "Herramienta para el Airdrop de eosDAC",
+    "welcome_message": "¡Gracias por participar en el airdrop de eosDAC!",
+    "tool_explanation": "Este formulario puede ser utilizado para realizar un pedido manual del airdrop a su dirección de Ethereum o revisar el estado del airdrop para su dirección de Ethereum",
+    "eth_address": "Dirección de ETH",
+    "eth_address_placeholder": " 0x... (esta debe ser su dirección pública de ETH)",
+    "no_private_key": "Atención: por favor ¡no ingrese su clave privada!",
+    "eos_amount": "Cantidad de EOS",
+    "status": "Estado",
+    "transaction_hash": "Hash de la transacción",
+    "view_on_etherscan": "Ver la transacción en etherscan",
+    "missing_eth_address": "Por favor, ingrese la dirección de Ethereum que contenía EOS el día 15 de abril a la 01:00 UTC.",
+    "eth_address_not_found": "No hemos podido encontrar la dirección de Ethereum que nos ha suministrado en la información contenida en el snapshot.",
+    "submit": "Enviar",
+    "start_over": "Comenzar nuevamente",
+    "airdrop_request_success": "Gracias! Su pedido de airdrop ha sido registrado exitosamente. Por favor, tenga en cuenta que puede tomar varios días antes de que los tokens sean procesados y enviados a su dirección.",
+    "address_count": "Cantidad de direcciones",
+    "total_eosdac": "eosDAC Totales",
+    "airdrop_status": "Progreso General del Airdrop hasta el momento",
+    "addresses": "Direcciones",
+    "eosdac_tokens": "Tokens de eosDAC",
+    "requested_explanation": "Sus tokens del airdrop están en la cola para ser enviados a más tardar el 15 de mayo. Por favor, sea paciente con el proceso de envío.",
+    "collected_explanation": "Su billetera ya debería contener los tokens de eosDAC.",
+    "unclaimed_explanation": "Esta dirección tiene menos de 100 EOS o se encuentra en la dirección de un exchange que no ha realizado el reclamo de tokens."
+  }
+}
