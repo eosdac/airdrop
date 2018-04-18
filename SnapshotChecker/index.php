@@ -91,12 +91,12 @@
             'airdrop_request_success' => '非常感谢！您的空投请求已经被成功记录。 温馨提示：代币的打包及到账可能会花费几天时间，请您耐心等候。',
             'address_count' => '地址计数',
             'total_eosdac' => '总 eosDAC数',
-            'airdrop_status' => '空投状态',
+            'airdrop_status' => '当前空投进展',
             'addresses' => '地址',
-            'eosdac_tokens' => 'eosDAC 令牌',
-            'requested_explanation' => '5月15日前，你的空投令牌將排隊等候發送給你。 請耐心等待發貨。',
-            'collected_explanation' => '你的錢包應該已經包含你的eosDAC令牌。',
-            'unclaimed_explanation' => '該地址的EOS少於100或者是無人認領的交換地址。',
+            'eosdac_tokens' => 'eosDAC代币',
+            'requested_explanation' => '您的空投代币将在5月15日前交付给您。请耐心等待。.',
+            'collected_explanation' => '你的钱包应该已经包含了你的eosDAC代币.',
+            'unclaimed_explanation' => '此地址可能在快照少于100个EOS或在一个无人认领的交易所地址。',
             ),
         );
 
