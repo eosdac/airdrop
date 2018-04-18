@@ -1,36 +1,19 @@
-    <?php
-
+<?php
 //error_reporting(E_ALL);
 //ini_set('display_errors', 1);
 
-    $lang = 'en';
-    $language_files = array_diff(scandir('./lang'), array('.', '..'));
-    if (isset($_POST['lang']) && in_array($_POST['lang'] . '.json', $language_files)) {
-        $lang = $_POST['lang'];
-    }
-    $supported_languages = array();
-    $strings = array();
-    foreach($language_files as $language_file) {
-        // note: This is safe because $language_files can only be set via scandir('./lang')
-        $language_file_json = file_get_contents('./lang/' . $language_file);
-        $langage_data = json_decode($language_file_json, true);
-        reset($langage_data);
-        $langauge_code = key($langage_data);
-        $supported_languages[$langauge_code] = $langage_data[$langauge_code]['language'];
-        if ($lang == $langauge_code) {
-            $strings = $langage_data[$langauge_code];
-        }
-    }
+include 'dbconnect.php';
+include 'include_language.php';
 
-    $action = isset($_POST['form_action']) ? $_POST['form_action'] : '';
-    $error = '';
+$action = isset($_POST['form_action']) ? $_POST['form_action'] : '';
+$error = '';
 
 ?>
 <html>
  <head>
   <title><?php print $strings['page_title']; ?></title>
 
-  <meta charset="utf-8"> 
+  <meta charset="utf-8">
 
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
@@ -38,6 +21,8 @@
 
 </head>
 <body>
+
+<!-- Copied from site, slightly modified -->
 <header class="banner navbar navbar-default navbar-static-top " role="banner">
 <div class="container">
 <div class="navbar-header">
@@ -66,6 +51,8 @@
 </ul> </nav>
 </div>
 </header>
+<!-- End copy -->
+
     <div class="container">
     <form method="POST">
         <input type="hidden" name="form_action" value="">
@@ -89,7 +76,6 @@
 
     // LOOK UP ADDRESS
     if ($action == 'lookup_eth_address') {
-        include 'dbconnect.php';
         /*
         $agree_to_terms = isset($_POST['agree_to_terms']) ? $_POST['agree_to_terms'] : '';
         if ($agree_to_terms != 'yes') {
@@ -103,7 +89,7 @@
         if ($error == '') {
             $query = "SELECT * FROM eos_holders WHERE eth_address = '" . $eth_address . "' LIMIT 1";
             $result = mysqli_query($conn, $query);
-            $header = '<table class="table"><thead><tr><th>' . $strings['eth_address'] . '</th><th>' . $strings['eos_amount'] . '</th><th>' . $strings['status'] . '</th><th>' . $strings['transaction_hash'] . '</th></tr></thead>';
+            $header = '<table class="table"><thead><tr><th>' . $strings['status'] . '</th><th>' . $strings['eth_address'] . '</th><th>' . $strings['eos_amount'] . '</th><th>' . $strings['transaction_hash'] . '</th></tr></thead>';
             $has_results = 0;
             $info = '';
             $status = '';
@@ -117,7 +103,7 @@
                     if ($value['status'] == '') {
                         $update_query = "UPDATE eos_holders SET status = 'REQUESTED' WHERE eth_address = '" . $eth_address . "' AND status = ''";
                         mysqli_query($conn, $update_query);
-                        $status = $value['status'] = 'REQUESTED';
+                        $status = 'REQUESTED';
                         $info = 'airdrop_request_success';
                     } else {
                         $info = 'already_requested';
@@ -137,12 +123,8 @@
                 }
                 $has_results = 1;
                 print '<tr>';
-                foreach ($value as $key => $element) {
-                    if ($key == 'transaction_hash' && $element != '') {
-                        $element = '<a href="https://etherscan.io/tx/' . $element . '">' . $strings['view_on_etherscan'] . "</a>";
-                    }
-                    print '<td>' . $element . '</td>';
-                }
+                print '<td>' . $status . '</td><td><a href="https://etherscan.io/address/' . $value['eth_address'] . '">' . $value['eth_address'] . '</a></td><td>' . number_format($value['eos_amount'],4) . '</td>';
+                print '<td><a href="https://etherscan.io/tx/' . $value['transaction_hash'] . '">' . $strings['view_on_etherscan'] . '</a></td>';
                 print '</tr>';
             }
             if ($has_results) {
@@ -173,95 +155,6 @@
                 <button type="submit" class="btn btn-primary"><?php print $strings['start_over']; ?></button>
             </form>
             <?php
-
-            print "<h2>" . $strings['airdrop_status'] . "</h2>";
-
-            $total_addresses = 0;
-            $total_addresses_collected = 0;
-            $total_addresses_requested = 0;
-            $total_addresses_blank = 0;
-
-            $total_eos = 0;
-            $total_eos_collected = 0;
-            $total_eos_requested = 0;
-            $total_eos_blank = 0;
-
-            $query = "SELECT status, count(*) as address_count, sum(eos_amount) as total_eos FROM eos_holders GROUP BY status";
-            $result = mysqli_query($conn, $query);
-            $table = '<table class="table"><thead><tr><th>' . $strings['status'] . '</th><th>' . $strings['address_count'] . '</th><th>' . $strings['total_eosdac'] . '</th></tr></thead>';
-            while($value = $result->fetch_array(MYSQLI_ASSOC)){
-                $total_addresses += $value['address_count'];
-                switch ($value['status']) {
-                    case 'REQUESTED':
-                        $total_addresses_requested += $value['address_count'];
-                        break;
-                    case 'COLLECTED':
-                        $total_addresses_collected += $value['address_count'];
-                        break;
-                    default:
-                        $total_addresses_blank += $value['address_count'];
-                        break;
-                }
-                $total_eos += $value['total_eos'];
-                switch ($value['status']) {
-                    case 'REQUESTED':
-                        $total_eos_requested += $value['total_eos'];
-                        break;
-                    case 'COLLECTED':
-                        $total_eos_collected += $value['total_eos'];
-                        break;
-                    default:
-                        $total_eos_blank += $value['total_eos'];
-                        break;
-                }
-                $status = $value['status'];
-                if ($status == '') {
-                    $status = 'UNCLAIMED';
-                }
-
-                $table .= '<tr><td>' . $status . '</td><td>' . $value['address_count'] . '</td><td>' . $value['total_eos'] . '</td>';
-                $table .= '</tr>';
-            }
-            $table .= '</table>';
-
-            $total_addresses_collected_percent = $total_addresses_collected / $total_addresses;
-            $total_addresses_collected_percent = number_format( $total_addresses_collected_percent * 100, 0 );
-            $total_addresses_requested_percent = $total_addresses_requested / $total_addresses;
-            $total_addresses_requested_percent = number_format( $total_addresses_requested_percent * 100, 0 );
-            $total_addresses_blank_percent = $total_addresses_blank / $total_addresses;
-            $total_addresses_blank_percent = number_format( $total_addresses_blank_percent * 100, 0 );
-            if ($total_addresses_collected_percent + $total_addresses_requested_percent + $total_addresses_blank_percent > 100) {
-                $total_addresses_blank_percent -= 1;
-            }
-
-            $total_eos_collected_percent = $total_eos_collected / $total_eos;
-            $total_eos_collected_percent = number_format( $total_eos_collected_percent * 100, 0 );
-            $total_eos_requested_percent = $total_eos_requested / $total_eos;
-            $total_eos_requested_percent = number_format( $total_eos_requested_percent * 100, 0 );
-            $total_eos_blank_percent = $total_eos_blank / $total_eos;
-            $total_eos_blank_percent = number_format( $total_eos_blank_percent * 100, 0 );
-            if ($total_eos_collected_percent + $total_eos_requested_percent + $total_eos_blank_percent > 100) {
-                $total_eos_blank_percent -= 1;
-            }
-            ?>
-
-            <h3><?php print $strings['addresses']; ?></h3>
-            <div class="progress">
-              <div class="progress-bar progress-bar-success" role="progressbar" style="width: <?php print $total_addresses_collected_percent; ?>%" aria-valuenow="<?php print $total_addresses_collected_percent; ?>" aria-valuemin="0" aria-valuemax="100">COLLECTED</div>
-              <div class="progress-bar" role="progressbar" style="width: <?php print $total_addresses_requested_percent; ?>%" aria-valuenow="<?php print $total_addresses_requested_percent; ?>" aria-valuemin="0" aria-valuemax="100">REQUESTED</div>
-              <div class="progress-bar progress-bar-info" role="progressbar" style="width: <?php print $total_addresses_blank_percent; ?>%" aria-valuenow="<?php print $total_addresses_blank_percent; ?>" aria-valuemin="0" aria-valuemax="100">UNCLAIMED</div>
-            </div>
-
-            <h3><?php print $strings['eosdac_tokens']; ?></h3>
-            <div class="progress">
-              <div class="progress-bar progress-bar-success" role="progressbar" style="width: <?php print $total_eos_collected_percent; ?>%" aria-valuenow="<?php print $total_eos_collected_percent; ?>" aria-valuemin="0" aria-valuemax="100">COLLECTED</div>
-              <div class="progress-bar" role="progressbar" style="width: <?php print $total_eos_requested_percent; ?>%" aria-valuenow="<?php print $total_eos_requested_percent; ?>" aria-valuemin="0" aria-valuemax="100">REQUESTED</div>
-              <div class="progress-bar progress-bar-info" role="progressbar" style="width: <?php print $total_eos_blank_percent; ?>%" aria-valuenow="<?php print $total_eos_blank_percent; ?>" aria-valuemin="0" aria-valuemax="100">UNCLAIMED</div>
-            </div>
-            <?php
-
-            print $table;
-
         }
     }
 
@@ -306,20 +199,21 @@
                 </label>
             </div>
           <?php
-          /*
-            <div class="form-check">
-                <input type="checkbox" class="form-check-input" id="agree_to_terms" name="agree_to_terms" value="yes">
-                <label class="form-check-label" for="agree_to_terms"><?php print $strings['terms']; ?></label>
-            </div>
-          */
           ?>
             <br />
             <input type="hidden" name="form_action" value="lookup_eth_address">
             <input type="hidden" name="lang" value="<?php print $lang; ?>">
             <button type="submit" class="btn btn-primary"><?php print $strings['submit']; ?></button>
         </form>
+        <br/>
+        <br/>
+        <hr/>
         <?php
     }
+    print "<h2>" . $strings['airdrop_status'] . "</h2>";
+
+    include "include_airdrop_status.php";
+
     ?>
     </div>
 </body>
