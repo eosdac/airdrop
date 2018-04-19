@@ -1,0 +1,28 @@
+{
+  "it": {
+    "language": "Italiano",
+    "page_title": "eosDAC Airdrop Tool",
+    "welcome_message": "Grazie per partecipare all’airdrop di eosDAC!",
+    "tool_explanation": "Questo semplice form può essere usato per richiedere l’airdrop manuale sul tuo indirizzo o per rivedere lo status dell’ airdrop per il tuo indirizzo Ethereum",
+    "eth_address": "Indirizzo ETH",
+    "eth_address_placeholder": " 0x... (questo dovrebbe essere il tuo indirizzo ETH pubblico)",
+    "no_private_key": "Attenzione: per favore non inserite la vostra chiave privata!",
+    "eos_amount": "Quantità di EOS",
+    "status": "Stato",
+    "transaction_hash": "Transaction Hash",
+    "view_on_etherscan": "Vedi la transazione su etherscan",
+    "missing_eth_address": "Per favore inserisci il tuo indirizzo Ethereum che includeva EOS il 15 Aprile alle ore 01:00 UTC.",
+    "eth_address_not_found": "Non siamo stati in grado di trovare l’indirizzo Ethereum che hai fornito alla data dello snapshot.",
+    "submit": "Sottoscrivi",
+    "start_over": "Ricomincia",
+    "airdrop_request_success": "Grazie! La tua richiesta di airdrop e’ stata correttamente registrata. Per favore nota che potrebbero passare alcuni giorni prima di ricevere i tuoi token.",
+    "address_count": "Conteggio dell’indirizzo",
+    "total_eosdac": "eosDAC totali",
+    "airdrop_status": "Progresso complessivo ad ora dell’ airdrop",
+    "addresses": "Indirizzi",
+    "eosdac_tokens": "Tokens eosDAC ",
+    "requested_explanation": "I tuoi tokens sono in coda e pronti per esserti spediti entro il 15 Maggio. Per favore sii paziente.",
+    "collected_explanation": "Il tuo wallet dovrebbe già contenere i tuoi eosDAC tokens.",
+    "unclaimed_explanation": "Questo indirizzo ha meno di 100 EOS o e’ l’indirizzo non reclamato di un Exchange."
+  }
+}
