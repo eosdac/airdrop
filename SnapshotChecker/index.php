@@ -102,7 +102,11 @@ $error = '';
                 $has_results = 1;
                 print '<tr>';
                 print '<td>' . $status . '</td><td><a href="https://etherscan.io/address/' . $value['eth_address'] . '">' . $value['eth_address'] . '</a></td><td>' . number_format($value['eos_amount'],4) . '</td>';
-                print '<td><a href="https://etherscan.io/tx/' . $value['transaction_hash'] . '">' . $strings['view_on_etherscan'] . '</a></td>';
+                if ($value['transaction_hash'] != '') {
+                    print '<td><a href="https://etherscan.io/tx/' . $value['transaction_hash'] . '">' . $strings['view_on_etherscan'] . '</a></td>';
+                } else {
+                    print "<td></td>";
+                }
                 print '</tr>';
             }
             if ($has_results) {
