@@ -8,7 +8,7 @@ Noted Issues :
 4. Batch 0107 also logged batch 0108 because counter wasn't advanced.
 5. Batch 0485 also logged batch 0486 because counter wasn't advanced
 6. Batch 0499 has an unexpected nonce issue - Will need to be picked up during end checks.. 
-
+7. Batch 0573 appears to have fallen victim from a temporary ethereum gas price spike which made some timeout  - Will need to be picked up during end checks. - note to keep constant check on fast gas price.
 
 
 
