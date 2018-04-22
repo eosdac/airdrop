@@ -12,5 +12,9 @@ Noted Issues :
 8. Batch 0675 had an issue on final transaction - not logged 
 9. Batch 0707 had gas price spike issue - last few transactions may have been affected - Will need to be picked up during end checks
 10. Batch 0788 also logged batch 0789 because counter wasn't advanced.
-
+11. Batch 0910 also logged batch 0911 because counter wasn't advanced.
+12. Batch 0913 did not complete - last few transactions may be affected - Will need to be picked up during end checks
+13. Batch 0922 also logged batch 0923 because counter wasn't advanced.
+14. Batch 0959 also logged batch 0960 because counter wasn't advanced.
+15. Batch 0988 also logged batch 0989 because counter wasn't advanced.
 
