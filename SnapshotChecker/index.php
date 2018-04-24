@@ -124,6 +124,9 @@ $error = '';
 
             } else {
                 $error = $strings['eth_address_not_found'];
+                if ($_POST['eth_address'] != "") {
+                    $error .= '<a href="https://etherscan.io/token/0x86fa049857e0209aa7d9e616f7eb3b3b78ecfdb0?a=' . strip_tags($_POST['eth_address']) . '">' . $strings['view_on_etherscan'] . '</a>';
+                }
             }
         }
         if ($error != '') {
