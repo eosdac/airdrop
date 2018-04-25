@@ -1,6 +1,6 @@
 <?php
 
-$log_folder = '../AirdropperLogs';
+$log_folder = '../AirdropperLogs2';
 $log_file = $log_folder . '/' . $argv[1];
 
 if (count($argv) == 1) {
