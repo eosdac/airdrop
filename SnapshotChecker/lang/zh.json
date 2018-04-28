@@ -23,6 +23,7 @@
     "eosdac_tokens": "eosDAC代币",
     "requested_explanation": "您的空投代币将在5月15日前交付给您。请耐心等待。.",
     "collected_explanation": "你的钱包应该已经包含了你的eosDAC代币.",
-    "unclaimed_explanation": "此地址可能在快照少于100个EOS或在一个无人认领的交易所地址。"
+    "unclaimed_explanation": "此地址可能在快照少于100个EOS或在一个无人认领的交易所地址。",
+    "withheld_explanation": "這些令牌不會被分配，並包括Block One所擁有的地址，我們可以通過交換來識別哪些不支持空投。"
   }
 }

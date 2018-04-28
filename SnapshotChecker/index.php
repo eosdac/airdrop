@@ -121,6 +121,9 @@ $error = '';
                 if ($status == 'UNCLAIMED') {
                     print '<p><strong>UNCLAIMED</strong>: ' . $strings['unclaimed_explanation'] . '</p>';
                 }
+                if ($status == 'WITHHELD') {
+                    print '<p><strong>WITHHELD</strong>: ' . $strings['withheld_explanation'] . '</p>';
+                }
 
             } else {
                 $error = $strings['eth_address_not_found'];

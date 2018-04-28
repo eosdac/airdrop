@@ -23,6 +23,7 @@
     "eosdac_tokens": "eosDAC Tokens",
     "requested_explanation": "Your airdrop tokens are in the queue to be delivered to you by May 15th. Please be patient for delivery.",
     "collected_explanation": "Your wallet should already contain your eosDAC tokens.",
-    "unclaimed_explanation": "This address has less than 100 EOS or is an unclaimed exchange address."
+    "unclaimed_explanation": "This address has less than 100 EOS or is an unclaimed exchange address.",
+    "withheld_explanation": "These tokens are not being distributed and include addresses owned by Block One and exchanges we could identify which did not support the airdrop."
   }
 }
