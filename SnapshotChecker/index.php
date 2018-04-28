@@ -176,6 +176,10 @@ $error = '';
 
     include "include_airdrop_status.php";
 
+    print "<p>";
+    print "<strong>WITHHELD:</strong> " . $strings['withheld_explanation'] . "<br />";
+    print "</p>";
+
     ?>
     </div>
 </body>
