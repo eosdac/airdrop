@@ -24,6 +24,6 @@
     "requested_explanation": "I tuoi tokens sono in coda e pronti per esserti spediti entro il 15 Maggio. Per favore sii paziente.",
     "collected_explanation": "Il tuo wallet dovrebbe già contenere i tuoi eosDAC tokens.",
     "unclaimed_explanation": "Questo indirizzo ha meno di 100 EOS o e’ l’indirizzo non reclamato di un Exchange.",
-    "withheld_explanation": "Questi token non vengono distribuiti e includono gli indirizzi di proprietà di Block One e gli scambi che potremmo identificare e che non hanno supportato l'airdrop."
+    "withheld_explanation": "Questi tokens non sono stati distribuiti ed includono quelli di Block One e quelli degli Exchange che non hanno supportato l’airdrop."
   }
 }
