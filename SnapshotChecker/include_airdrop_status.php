@@ -85,7 +85,7 @@ if ($total_eos_collected_percent + $total_eos_requested_percent + $total_eos_bla
     <div class="progress-bar progress-bar-success" role="progressbar" style="width: <?php print $total_addresses_collected_percent; ?>%" aria-valuenow="<?php print $total_addresses_collected_percent; ?>" aria-valuemin="0" aria-valuemax="100">COLLECTED</div>
     <div class="progress-bar" role="progressbar" style="width: <?php print $total_addresses_requested_percent; ?>%" aria-valuenow="<?php print $total_addresses_requested_percent; ?>" aria-valuemin="0" aria-valuemax="100">REQUESTED</div>
     <div class="progress-bar progress-bar-info" role="progressbar" style="width: <?php print $total_addresses_blank_percent; ?>%" aria-valuenow="<?php print $total_addresses_blank_percent; ?>" aria-valuemin="0" aria-valuemax="100">UNCLAIMED</div>
-    <div class="progress-bar progress-bar-secondary" role="progressbar" style="width: <?php print $total_addresses_withheld_percent; ?>%" aria-valuenow="<?php print $total_addresses_withheld_percent; ?>" aria-valuemin="0" aria-valuemax="100">WITHHELD</div>
+    <div class="progress-bar progress-bar-warning" role="progressbar" style="width: <?php print $total_addresses_withheld_percent; ?>%" aria-valuenow="<?php print $total_addresses_withheld_percent; ?>" aria-valuemin="0" aria-valuemax="100">WITHHELD</div>
 </div>
 
 <h3><?php print $strings['eosdac_tokens']; ?></h3>
@@ -93,7 +93,7 @@ if ($total_eos_collected_percent + $total_eos_requested_percent + $total_eos_bla
     <div class="progress-bar progress-bar-success" role="progressbar" style="width: <?php print $total_eos_collected_percent; ?>%" aria-valuenow="<?php print $total_eos_collected_percent; ?>" aria-valuemin="0" aria-valuemax="100">COLLECTED</div>
     <div class="progress-bar" role="progressbar" style="width: <?php print $total_eos_requested_percent; ?>%" aria-valuenow="<?php print $total_eos_requested_percent; ?>" aria-valuemin="0" aria-valuemax="100">REQUESTED</div>
     <div class="progress-bar progress-bar-info" role="progressbar" style="width: <?php print $total_eos_blank_percent; ?>%" aria-valuenow="<?php print $total_eos_blank_percent; ?>" aria-valuemin="0" aria-valuemax="100">UNCLAIMED</div>
-    <div class="progress-bar progress-bar-secondary" role="progressbar" style="width: <?php print $total_eos_withheld_percent; ?>%" aria-valuenow="<?php print $total_eos_withheld_percent; ?>" aria-valuemin="0" aria-valuemax="100">WITHHELD</div>
+    <div class="progress-bar progress-bar-warning" role="progressbar" style="width: <?php print $total_eos_withheld_percent; ?>%" aria-valuenow="<?php print $total_eos_withheld_percent; ?>" aria-valuemin="0" aria-valuemax="100">WITHHELD</div>
 </div>
 <?php
 
