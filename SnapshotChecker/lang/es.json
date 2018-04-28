@@ -24,6 +24,6 @@
     "requested_explanation": "Sus tokens del airdrop están en la cola para ser enviados a más tardar el 15 de mayo. Por favor, sea paciente con el proceso de envío.",
     "collected_explanation": "Su billetera ya debería contener los tokens de eosDAC.",
     "unclaimed_explanation": "Esta dirección tiene menos de 100 EOS o se encuentra en la dirección de un exchange que no ha realizado el reclamo de tokens.",
-    "withheld_explanation": "Estos tokens no se están distribuyendo e incluyen direcciones propiedad de Block One e intercambios que pudimos identificar que no admitían el lanzamiento aéreo."
+    "withheld_explanation": "Estos tokens no están siendo distribuidos e incluyen direcciones que son propiedad de Block One y de los exchanges que no han dado soporte al airdrop que hemos podido identificar."
   }
 }
