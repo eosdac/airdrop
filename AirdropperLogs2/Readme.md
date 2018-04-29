@@ -10,4 +10,6 @@ Known issues
 6. Batch 1588 - Gas price surge, early timeout but transactions may well have gone through - checks needed
 7. Batch 1599 - Gas price surge, early timeout but transactions may well have gone through - checks needed
 8. Batch 1633 - no logging but transactions may well have gone through - checks needed
+9. Batch 1781 - Confirmations issues - maybe gas related - need to check transactions
+10. Batch 1782 - Confirmations issues - maybe gas related - need to check transactions
 
