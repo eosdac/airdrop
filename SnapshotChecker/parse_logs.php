@@ -1,6 +1,9 @@
 <?php
 
-$log_folder = '../AirdropperLogs2';
+$log_folder = '../AirdropperLogs';
+if (isset($argv[2])) {
+    $log_folder .= $argv[2];
+}
 $log_file = $log_folder . '/' . $argv[1];
 
 if (count($argv) == 1) {
@@ -26,7 +29,7 @@ if (($handle = fopen($log_file, "r")) !== FALSE) {
                 $line_data['address'] = trim($raw_line_data[7]);
             }
         }
-        if (trim($raw_line_data[0]) == '"transactionHash":') {
+        if (array_key_exists('address', $line_data) && trim($raw_line_data[0]) == '"transactionHash":') {
             $line_data['transaction_hash'] = trim($raw_line_data[1], "\" ,\t\n\r");
         }
         if (array_key_exists('address', $line_data) && array_key_exists('transaction_hash', $line_data)) {
@@ -38,7 +41,7 @@ if (($handle = fopen($log_file, "r")) !== FALSE) {
 }
 
 foreach ($log_data as $log_entry) {
-    print "UPDATE eos_holders SET status = 'COLLECTED', transaction_hash = '" . $log_entry['transaction_hash'] . "' WHERE eth_address = '" . $log_entry['address'] . "';\n";
+    print "UPDATE eos_holders SET status = 'COLLECTED', transaction_hash = '" . $log_entry['transaction_hash'] . "' WHERE status != 'WITHHELD' AND eth_address = '" . $log_entry['address'] . "';\n";
 }
 
 //var_dump($log_data);
