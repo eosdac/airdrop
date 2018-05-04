@@ -12,8 +12,8 @@ if (count($argv) == 1) {
 }
 
 if (!file_exists($log_file)) {
-    print $log_file . " can not be found.\n";
-    print "Please add a log file name such as Batch0100.log\n";
+    //print $log_file . " can not be found.\n";
+    //print "Please add a log file name such as Batch0100.log\n";
     exit();
 }
 
